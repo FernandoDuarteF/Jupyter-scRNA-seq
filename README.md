@@ -65,6 +65,16 @@ Rscript -e "BiocManager::install('DropletUtils')"
 
 ```
 
+For doublet detection we will use the ``scDblFinder`` package from **Bioconductor**:
+
+```
+# We first take care of dependencies
+conda install libxml2
+conda install pkg-config
+# Now we install
+Rscript -e "BiocManager::install('scDblFinder')"
+```
+
 View below for the main packages versions used for this framework. Also check the list of pip packages and the R session.
 
 
