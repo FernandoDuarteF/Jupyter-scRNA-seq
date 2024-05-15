@@ -247,3 +247,26 @@ webencodings              0.5.1
 websocket-client          1.8.0
 wheel                     0.43.0
 ```
+
+### Docker
+
+A docker image was built from the ``dockefile`` inside the ``docker`` folder:
+
+```
+docker build -t sc/scanpy:latest -t sc/scanpy:1.1 . &> docker.log 2>&1 &
+```
+
+To run interactive container:
+
+```
+docker run --rm -it -p 8888:8888 -v $(pwd):/home/scanpy sc/scanpy:latest /bin/bash
+```
+
+Inside container:
+
+```
+cd scanpy
+jupyter notebook preprocessing/preprocessing.ipynb --port=8888 --ip=0.0.0.0 --allow-root
+```
+
+For some reason cannot open jupyter notebook using **Firefox**, had to use Edge instead.

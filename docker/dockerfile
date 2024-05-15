@@ -1,0 +1,19 @@
+FROM bioconductor/bioconductor_docker:devel
+WORKDIR /app
+COPY requirements.txt /app
+RUN pip3 --version
+RUN python3 --version
+RUN pip show setuptools
+RUN apt-get update \
+		#&& apt-get install --only-upgrade -y  python3.10 \
+		&& python3 -m pip install --upgrade pip==23.0.1 \
+		#&& pip install --upgrade setuptools==69.5.1 \
+		&& pip3 install -r requirements.txt \
+		## to remove side-effects of apt-get update \
+		&& apt-get clean \
+		&& rm -rf /var/lib/apt/lists/*
+RUN R -e "install.packages('snow')"
+RUN R -e "install.packages('SoupX')"
+RUN R -e "BiocManager::install(c('DropletUtils', 'scDblFinder', 'scry'))"
+WORKDIR /home
+EXPOSE 8888
